@@ -12,7 +12,7 @@ export class StoreRepository extends Repository<Store> {
 	public async getStoreById(storeId: number): Promise<Store | undefined> {
 		const objStore = await getCustomRepository(StoreRepository)
 			.createQueryBuilder('store')
-			.where('store.storeId =:storeId', { storeId: storeId })
+			.where('store.storeId = :storeId', { storeId: storeId })
 			.getOne()
 		return objStore
 	}

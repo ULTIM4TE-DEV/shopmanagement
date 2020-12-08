@@ -8,11 +8,10 @@ import path from 'path'
 import 'reflect-metadata'
 import { getConnection } from 'typeorm'
 import config from './configs/config'
-import { storeController } from './controllers/storeController'
-// import routes from './routes/api'
+import routes from './routes/api'
 import { dbConnection } from './utils/db-connection'
 
-class ClarisApp {
+class App {
 	public async init() {
 		const app = express()
 		const route = Router()
@@ -44,8 +43,7 @@ class ClarisApp {
 				app.use(Sentry.Handlers.requestHandler())
 				app.use(Sentry.Handlers.errorHandler())
 				app.use(cors())
-				// app.use('/api', routes)
-				route.get('/api/getStores', storeController.getStores)
+				app.use('/api', routes)
 
 				app.use((req: Request, res: Response, next: any) => {
 					res.header('Access-Control-Allow-Origin', '*')
@@ -66,4 +64,4 @@ class ClarisApp {
 		}
 	}
 }
-export const app = new ClarisApp().init()
+export const app = new App().init()

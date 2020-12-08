@@ -4,7 +4,7 @@ import { Product } from './Product'
 
 @Entity({ name: 'productCategory' })
 export class ProductCategory {
-	@PrimaryGeneratedColumn({ name: 'productCategoryId' })
+	@PrimaryGeneratedColumn({ name: 'id' })
 	public productCategoryId: number
 
 	@Column({ name: 'productCategoryName', type: 'varchar' })

@@ -6,6 +6,7 @@ import { StoreRepository } from '../repository/StoreRepository'
 class StoreController {
 	public async getStores(req: Request, res: Response): Promise<Response> {
 		const arrStore = await getCustomRepository(StoreRepository).getStores()
+		console.log('arrStore', arrStore)
 		return res.status(200).json({
 			response: arrStore,
 			responseCode: 200,
@@ -13,7 +14,7 @@ class StoreController {
 	}
 
 	public async getStoreById(req: Request, res: Response): Promise<Response> {
-		const storeId = Number(req.query.storeId)
+		const storeId = Number(req.params.id)
 		const objStore = await getCustomRepository(StoreRepository).getStoreById(storeId)
 		if (objStore) {
 			return res.status(200).json({

@@ -10,4 +10,10 @@ route.get('/', (req, res) => {
 })
 // DB Connection
 
-route.get('/store/getStores', storeController.getStores)
+route.get('/stores', storeController.getStores)
+route.get('/stores/:id', storeController.getStoreById)
+//route.post('/stores', storeController.createStore)
+//route.put('/stores/:id', storeController.updateStore)
+//route.delete('/stores', storeController.deleteStore)
+
+export default route

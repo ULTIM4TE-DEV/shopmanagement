@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { ProductCategory } from './ProductCategory'
 @Entity({ name: 'store' })
 export class Store {
-	@PrimaryGeneratedColumn({ name: 'storeId' })
+	@PrimaryGeneratedColumn({ name: 'id' })
 	public storeId: number
 
 	@Column({ name: 'storeName', type: 'varchar' })
