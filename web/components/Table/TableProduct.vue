@@ -2,9 +2,9 @@
 	<div>
 		<a-table bordered :columns="columns" :data-source="data" :pagination="{ pageSize: 5 }">
 			<span slot="action" slot-scope="text, record">
-				<a @click="openModalEdit(record)">Edit {{ record }}</a>
+				<a @click="openModalEdit(record)">Edit</a>
 				<a-divider type="vertical" />
-				<a>Delete {{ record.key }}</a>
+				<a @click="openModalDelete(record)">Delete </a>
 			</span>
 		</a-table>
 	</div>
@@ -47,6 +47,16 @@ export default {
 					key: 'unit',
 				},
 				{
+					title: 'CategoryId',
+					dataIndex: 'categoryId',
+					key: 'categoryId',
+				},
+				{
+					title: 'StoreId',
+					dataIndex: 'storeId',
+					key: 'storeId',
+				},
+				{
 					title: 'Action',
 					key: 'action',
 					scopedSlots: { customRender: 'action' },
@@ -58,6 +68,9 @@ export default {
 		openModalEdit(record) {
 			console.log('In table emit', record)
 			this.$emit('openModalEdit', record)
+		},
+		openModalDelete(record) {
+			this.$emit('openModalDelete', record)
 		},
 		click(value) {
 			console.log('click')

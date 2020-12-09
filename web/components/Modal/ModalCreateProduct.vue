@@ -52,13 +52,31 @@
 					]"
 				/>
 			</a-form-item>
+			<a-form-item label="Category">
+				<a-select
+					v-decorator="[
+						'productCategoryId',
+						{
+							initialValue: editDataUse ? editDataUse.categoryId : undefined,
+							rules: [{ required: true, message: 'Please input your Category!' }],
+						},
+					]"
+				>
+					<a-select-option v-for="item in category" :key="item.id" :value="item.id">
+						{{ item.productCategoryName }}
+					</a-select-option>
+				</a-select>
+			</a-form-item>
 			<a-form-item :wrapper-col="{ span: 24 }">
 				<a-row type="flex" justify="center" :gutter="[8, 8]">
 					<a-col>
 						<a-button @click="closeModal"> Close </a-button>
 					</a-col>
-					<a-col>
-						<a-button type="primary" @click="handleSubmit"> Submit </a-button>
+					<a-col v-if="editDataUse">
+						<a-button type="primary" @click="handleEdit"> Update </a-button>
+					</a-col>
+					<a-col v-else>
+						<a-button type="primary" @click="handleCreate"> Submit </a-button>
 					</a-col>
 				</a-row>
 			</a-form-item>
@@ -67,6 +85,7 @@
 </template>
 
 <script>
+import productCategoryAPI from '~/api/productCategory'
 export default {
 	props: {
 		visible: Boolean,
@@ -77,22 +96,50 @@ export default {
 		editData() {
 			this.editDataUse = this.editData
 		},
-		closeModal() {
-			this.editDataUse = null
+		visible() {
+			if (this.visible === false) {
+				this.editDataUse = null
+				this.form.resetFields()
+			}
 		},
+	},
+	mounted() {
+		this.getProductCategories()
 	},
 	data() {
 		return {
 			form: this.$form.createForm(this, { name: 'createProduct' }),
 			editDataUse: null,
+			category: [],
 		}
 	},
 	methods: {
-		handleSubmit() {
+		getProductCategories() {
+			productCategoryAPI.getProductCategories().then((response) => {
+				this.category = response.response
+			})
+		},
+		handleCreate() {
 			this.form.validateFields((err, values) => {
 				if (!err) {
+					const payload = {
+						...values,
+						storeId: this.$route.params,
+					}
 					console.log('values', values)
-					this.$emit('submit', values)
+					this.$emit('create', payload)
+				}
+			})
+		},
+		handleEdit() {
+			this.form.validateFields((err, values) => {
+				if (!err) {
+					const payload = {
+						...values,
+						id: this.editDataUse.key,
+					}
+					console.log('payload', payload)
+					this.$emit('edit', payload)
 				}
 			})
 		},

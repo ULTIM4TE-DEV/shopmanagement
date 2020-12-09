@@ -4,7 +4,11 @@
 			<a-button slot="extra" @click="openModal">Create Product</a-button>
 			<a-row>
 				<a-col>
-					<TableProduct :data="productList" @openModalEdit="openModalEdit"></TableProduct>
+					<TableProduct
+						:data="productList"
+						@openModalEdit="openModalEdit"
+						@openModalDelete="openModalDelete"
+					></TableProduct>
 				</a-col>
 			</a-row>
 		</a-card>
@@ -33,59 +37,64 @@ export default {
 	},
 	methods: {
 		create(form) {
-			console.log('form', form)
-			try {
-				productAPI.createProduct(form).then((response) => {
-					console.log('response', response)
+			productAPI.createProduct(form).then((response) => {
+				console.log('response', response)
+				if (response.status === 201) {
 					this.$success({
-						title: 'Create store success !',
+						title: 'Create product success !',
+						centered: true,
+						onOk: () => {
+							this.editData = null
+							this.getProductList()
+							this.closeModal()
+						},
 					})
-				})
-			} catch (error) {
-				this.$error({
-					title: error,
-				})
-			}
+				} else {
+					this.$error({
+						centered: true,
+						title: 'Create product error !',
+					})
+				}
+			})
 		},
 		edit(form) {
-			console.log('form', form)
-			try {
-				productAPI.editProduct(form).then((response) => {
-					console.log('response', response)
+			productAPI.editProduct(form).then((response) => {
+				if (response.status === 201) {
 					this.$success({
+						centered: true,
 						title: 'Edit product success !',
+						onOk: () => {
+							this.editData = null
+							this.getProductList()
+							this.closeModal()
+						},
 					})
-				})
-			} catch (error) {
-				this.$error({
-					title: error,
-				})
-			}
+				} else {
+					this.$error({
+						centered: true,
+						title: 'Edit product error !',
+					})
+				}
+			})
 		},
 		openModalDelete(record) {
-			console.log('detete', record)
 			this.$confirm({
 				title: `Are you sure delete ${record.name} ?`,
 				okText: 'Yes',
 				okType: 'danger',
-				centered: true,
 				cancelText: 'No',
-				onOk() {
-					try {
-						productAPI.deleteProduct(record.key).then((response) => {
-							console.log('response', response)
-							this.$success({
-								title: 'Delete product success !',
-							})
+				centered: true,
+				onOk: () => {
+					productAPI.deleteProduct(record.key).then((response) => {
+						this.$success({
+							title: 'Delete product success !',
+							centered: true,
+							onOk: () => {
+								this.getProductList()
+								this.closeModal()
+							},
 						})
-					} catch (error) {
-						this.$error({
-							title: error,
-						})
-					}
-				},
-				onCancel() {
-					console.log('Cancel')
+					})
 				},
 			})
 		},
@@ -101,23 +110,20 @@ export default {
 			this.visible = false
 		},
 		getProductList() {
-			console.log('call')
-			try {
-				productAPI.getProductsByStoreId(this.$route.params.id).then((response) => {
-					const mapData = response.response.map((item) => {
-						return {
-							key: item.id,
-							name: item.productDetail,
-							description: item.productName,
-							price: item.productPrice,
-							unit: item.productUnit,
-						}
-					})
-					this.productList = mapData
+			productAPI.getProductsByStoreId(this.$route.params.id).then((response) => {
+				const mapData = response.response.map((item) => {
+					return {
+						key: item.id,
+						name: item.productDetail,
+						description: item.productName,
+						price: item.productPrice,
+						unit: item.productUnit,
+						categoryId: item.productCategoryId.id,
+						storeId: item.storeId.id,
+					}
 				})
-			} catch (error) {
-				console.log('error', error)
-			}
+				this.productList = mapData
+			})
 		},
 	},
 }

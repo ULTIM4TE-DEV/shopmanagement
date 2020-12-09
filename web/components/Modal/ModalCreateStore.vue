@@ -79,8 +79,11 @@ export default {
 		editData() {
 			this.editDataUse = this.editData
 		},
-		closeModal() {
-			this.editDataUse = null
+		visible() {
+			if (this.visible === false) {
+				this.editDataUse = null
+				this.form.resetFields()
+			}
 		},
 	},
 	data() {
@@ -100,12 +103,12 @@ export default {
 		},
 		handleEdit() {
 			this.form.validateFields((err, values) => {
-				const payload = {
-					...values,
-					id: this.editDataUse.id,
-				}
 				if (!err) {
-					console.log('values', values)
+					const payload = {
+						...values,
+						id: this.editDataUse.key,
+					}
+					console.log('payload', payload)
 					this.$emit('edit', payload)
 				}
 			})

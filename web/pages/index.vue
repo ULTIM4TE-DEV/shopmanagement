@@ -4,11 +4,7 @@
 			<a-button slot="extra" @click="openModal">Create Store</a-button>
 			<a-row>
 				<a-col>
-					<TableStore
-						:data="storeList"
-						@openModalEdit="openModalEdit"
-						@openModalDelete="openModalDelete"
-					></TableStore>
+					<TableStore :data="storeList" @openModalEdit="openModalEdit"></TableStore>
 				</a-col>
 			</a-row>
 		</a-card>
@@ -37,60 +33,44 @@ export default {
 	},
 	methods: {
 		create(form) {
-			console.log('create', form)
-			try {
-				storeAPI.createStore(form).then((response) => {
-					console.log('response', response)
+			storeAPI.createStore(form).then((response) => {
+				console.log('response', response.status)
+				if (response.status === 201) {
 					this.$success({
 						title: 'Create store success !',
+						centered: true,
+						onOk: () => {
+							this.editData = null
+							this.getStoreList()
+							this.closeModal()
+						},
 					})
-				})
-			} catch (error) {
-				this.$error({
-					title: error,
-				})
-			}
+				} else {
+					this.$error({
+						centered: true,
+						title: 'Create store error !',
+					})
+				}
+			})
 		},
 		edit(form) {
-			console.log('edit', form)
-			try {
-				storeAPI.editStore(form).then((response) => {
-					console.log('response', response)
+			storeAPI.editStore(form).then((response) => {
+				if (response.status === 201) {
 					this.$success({
+						centered: true,
 						title: 'Edit store success !',
+						onOk: () => {
+							this.editData = null
+							this.getStoreList()
+							this.closeModal()
+						},
 					})
-				})
-			} catch (error) {
-				this.$error({
-					title: error,
-				})
-			}
-		},
-		openModalDelete(record) {
-			console.log('detete', record)
-			this.$confirm({
-				title: `Are you sure delete ${record.name} ?`,
-				okText: 'Yes',
-				okType: 'danger',
-				centered: true,
-				cancelText: 'No',
-				onOk() {
-					try {
-						storeAPI.createStore(record.key).then((response) => {
-							console.log('response', response)
-							this.$success({
-								title: 'Delete store success !',
-							})
-						})
-					} catch (error) {
-						this.$error({
-							title: error,
-						})
-					}
-				},
-				onCancel() {
-					console.log('Cancel')
-				},
+				} else {
+					this.$error({
+						centered: true,
+						title: 'Edit store error !',
+					})
+				}
 			})
 		},
 		openModalEdit(value) {
@@ -105,22 +85,18 @@ export default {
 			this.visible = false
 		},
 		getStoreList() {
-			try {
-				storeAPI.getStores().then((response) => {
-					const mapData = response.response.map((item) => {
-						return {
-							key: item.id,
-							name: item.storeName,
-							description: item.storeDetail,
-							phone: item.storePhoneNumber,
-							address: item.storeAddress,
-						}
-					})
-					this.storeList = mapData
+			storeAPI.getStores().then((response) => {
+				const mapData = response.response.map((item) => {
+					return {
+						key: item.id,
+						name: item.storeName,
+						description: item.storeDetail,
+						phone: item.storePhoneNumber,
+						address: item.storeAddress,
+					}
 				})
-			} catch (error) {
-				console.log('error', error)
-			}
+				this.storeList = mapData
+			})
 		},
 	},
 }

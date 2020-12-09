@@ -10,7 +10,7 @@ export const createInstance = (context) => {
 	apiInstance.context = context
 
 	const instance = axios.create({
-		baseURL: 'http://api/api/',
+		baseURL: 'http://localhost:8100/api/',
 	})
 
 	instance.interceptors.request.use((config) => {
