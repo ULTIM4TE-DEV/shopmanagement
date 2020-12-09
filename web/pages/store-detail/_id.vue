@@ -1,45 +1,41 @@
 <template>
 	<div class="w-full flex flex-col justify-center">
-		<a-card title="Store list" bordered>
-			<a-button slot="extra" @click="openModal">Create Store</a-button>
+		<a-card title="Product list" bordered>
+			<a-button slot="extra" @click="openModal">Create Product</a-button>
 			<a-row>
 				<a-col>
-					<TableStore
-						:data="storeList"
-						@openModalEdit="openModalEdit"
-						@openModalDelete="openModalDelete"
-					></TableStore>
+					<TableProduct :data="productList" @openModalEdit="openModalEdit"></TableProduct>
 				</a-col>
 			</a-row>
 		</a-card>
-		<ModalCreateStore
+		<ModalCreateProduct
 			:visible="visible"
 			:closeModal="closeModal"
 			:editData="editData"
 			@create="create"
 			@edit="edit"
-		></ModalCreateStore>
+		></ModalCreateProduct>
 	</div>
 </template>
 
 <script>
-import storeAPI from '~/api/store'
+import productAPI from '~/api/product'
 export default {
 	data() {
 		return {
-			storeList: [],
+			productList: [],
 			visible: false,
 			editData: null,
 		}
 	},
 	mounted() {
-		this.getStoreList()
+		this.getProductList()
 	},
 	methods: {
 		create(form) {
-			console.log('create', form)
+			console.log('form', form)
 			try {
-				storeAPI.createStore(form).then((response) => {
+				productAPI.createProduct(form).then((response) => {
 					console.log('response', response)
 					this.$success({
 						title: 'Create store success !',
@@ -52,12 +48,12 @@ export default {
 			}
 		},
 		edit(form) {
-			console.log('edit', form)
+			console.log('form', form)
 			try {
-				storeAPI.editStore(form).then((response) => {
+				productAPI.editProduct(form).then((response) => {
 					console.log('response', response)
 					this.$success({
-						title: 'Edit store success !',
+						title: 'Edit product success !',
 					})
 				})
 			} catch (error) {
@@ -76,10 +72,10 @@ export default {
 				cancelText: 'No',
 				onOk() {
 					try {
-						storeAPI.createStore(record.key).then((response) => {
+						productAPI.deleteProduct(record.key).then((response) => {
 							console.log('response', response)
 							this.$success({
-								title: 'Delete store success !',
+								title: 'Delete product success !',
 							})
 						})
 					} catch (error) {
@@ -104,19 +100,20 @@ export default {
 		closeModal() {
 			this.visible = false
 		},
-		getStoreList() {
+		getProductList() {
+			console.log('call')
 			try {
-				storeAPI.getStores().then((response) => {
+				productAPI.getProductsByStoreId(this.$route.params.id).then((response) => {
 					const mapData = response.response.map((item) => {
 						return {
 							key: item.id,
-							name: item.storeName,
-							description: item.storeDetail,
-							phone: item.storePhoneNumber,
-							address: item.storeAddress,
+							name: item.productDetail,
+							description: item.productName,
+							price: item.productPrice,
+							unit: item.productUnit,
 						}
 					})
-					this.storeList = mapData
+					this.productList = mapData
 				})
 			} catch (error) {
 				console.log('error', error)

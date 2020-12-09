@@ -1,0 +1,11 @@
+@import '@/assets/fonts/anuphan/anuphan.css';
+
+html,
+body {
+	font-size: 18px;
+	font-family: 'Anuphan';
+}
+
+.ant-card {
+	border-radius: 1.25rem;
+}

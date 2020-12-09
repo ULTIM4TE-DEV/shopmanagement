@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-ExtraLight.eot');
+    src: url('../anuphan/fonts/Anuphan-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-ExtraLight.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-ExtraLight.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-ExtraLight.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-ExtraLight.svg#Anuphan-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-SemiBold.eot');
+    src: url('../anuphan/fonts/Anuphan-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-SemiBold.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-SemiBold.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-SemiBold.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-SemiBold.svg#Anuphan-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-Regular.eot');
+    src: url('../anuphan/fonts/Anuphan-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-Regular.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-Regular.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-Regular.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-Regular.svg#Anuphan-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-Bold.eot');
+    src: url('../anuphan/fonts/Anuphan-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-Bold.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-Bold.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-Bold.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-Bold.svg#Anuphan-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-Light.eot');
+    src: url('../anuphan/fonts/Anuphan-Light.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-Light.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-Light.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-Light.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-Light.svg#Anuphan-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-Thin.eot');
+    src: url('../anuphan/fonts/Anuphan-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-Thin.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-Thin.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-Thin.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-Thin.svg#Anuphan-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anuphan';
+    src: url('../anuphan/fonts/Anuphan-Medium.eot');
+    src: url('../anuphan/fonts/Anuphan-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../anuphan/fonts/Anuphan-Medium.woff2') format('woff2'),
+        url('../anuphan/fonts/Anuphan-Medium.woff') format('woff'),
+        url('../anuphan/fonts/Anuphan-Medium.ttf') format('truetype'),
+        url('../anuphan/fonts/Anuphan-Medium.svg#Anuphan-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
