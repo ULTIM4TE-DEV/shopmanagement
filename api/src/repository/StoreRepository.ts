@@ -12,16 +12,16 @@ export class StoreRepository extends Repository<Store> {
 	public async getStoreById(storeId: number): Promise<Store | undefined> {
 		const objStore = await getCustomRepository(StoreRepository)
 			.createQueryBuilder('store')
-			.where('store.storeId = :storeId', { storeId: storeId })
+			.where('store.id = :storeId', { storeId: storeId })
 			.getOne()
 		return objStore
 	}
 
-	public async createStore(product: Store): Promise<Store | undefined> {
-		return await getCustomRepository(StoreRepository).save(product)
+	public async createStore(store: Store): Promise<Store | undefined> {
+		return await getCustomRepository(StoreRepository).save(store)
 	}
 
-	public async editStore(product: Store): Promise<Store | undefined> {
-		return await getCustomRepository(StoreRepository).save(product)
+	public async editStore(store: Store): Promise<Store | undefined> {
+		return await getCustomRepository(StoreRepository).save(store)
 	}
 }

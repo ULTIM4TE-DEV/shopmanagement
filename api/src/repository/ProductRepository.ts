@@ -6,7 +6,8 @@ export class ProductRepository extends Repository<Product> {
 		const arrProduct = await getCustomRepository(ProductRepository)
 			.createQueryBuilder('product')
 			.leftJoinAndSelect('product.productCategoryId', 'productCategory')
-			.where('productCategory.id =3')
+			.leftJoinAndSelect('product.storeId', 'store')
+			.where('productCategory.id')
 			.getMany()
 		return arrProduct
 	}
@@ -14,6 +15,7 @@ export class ProductRepository extends Repository<Product> {
 	public async getProductsByStoreId(storeId: number): Promise<Product[] | undefined> {
 		const arrProduct = await getCustomRepository(ProductRepository)
 			.createQueryBuilder('product')
+			.leftJoinAndSelect('product.productCategoryId', 'productCategory')
 			.leftJoinAndSelect('product.storeId', 'store')
 			.where('store.id =:storeId', { storeId: storeId })
 			.getMany()
@@ -23,6 +25,8 @@ export class ProductRepository extends Repository<Product> {
 	public async getProductById(productId: number): Promise<Product | undefined> {
 		const objProduct = await getCustomRepository(ProductRepository)
 			.createQueryBuilder('product')
+			.leftJoinAndSelect('product.productCategoryId', 'productCategory')
+			.leftJoinAndSelect('product.storeId', 'store')
 			.where('product.id = :productId', { productId: productId })
 			.getOne()
 		return objProduct

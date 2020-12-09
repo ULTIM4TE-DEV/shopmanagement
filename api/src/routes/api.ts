@@ -18,9 +18,6 @@ route.get('/store/:id', storeController.getStoreById)
 route.post('/store/create', storeController.createStore)
 route.put('/store/update', storeController.editStore)
 
-//route.put('/stores/:id', storeController.updateStore)
-//route.delete('/stores', storeController.deleteStore)
-
 route.get('/products', productController.getProducts)
 route.get('/product/:id', productController.getProductById)
 route.get('/products/:id', productController.getProductsByStoreId)
