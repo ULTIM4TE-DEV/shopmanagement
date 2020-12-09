@@ -1,11 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { Store } from '../models/Store'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Product } from './Product'
 
 @Entity({ name: 'productCategory' })
 export class ProductCategory {
 	@PrimaryGeneratedColumn({ name: 'id' })
-	public productCategoryId: number
+	public id: number
 
 	@Column({ name: 'productCategoryName', type: 'varchar' })
 	public productCategoryName: string
@@ -13,11 +12,7 @@ export class ProductCategory {
 	@Column({ name: 'productCategoryDetail', type: 'varchar' })
 	public productCategoryDetail: string
 
-	@ManyToOne((_type) => Store, (store) => store.storeId, { nullable: true })
-	@JoinColumn({ name: 'store' })
-	public store: Store
-
-	@OneToMany((_type) => Product, (product) => product.productId, {
+	@OneToMany((_type) => Product, (product) => product.id, {
 		cascade: ['insert', 'remove', 'update'],
 	})
 	public product: Product[]

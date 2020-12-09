@@ -4,7 +4,7 @@ yarn typeorm migration:create -n "name migration"
 
 <!-- ตอนใช้ Migration Migration -->
 
-yarn typeorm migration:run"
+yarn typeorm migration:run
 
 <!-- ตอน Drop Schema  -->
 

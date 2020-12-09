@@ -16,4 +16,12 @@ export class StoreRepository extends Repository<Store> {
 			.getOne()
 		return objStore
 	}
+
+	public async createStore(product: Store): Promise<Store | undefined> {
+		return await getCustomRepository(StoreRepository).save(product)
+	}
+
+	public async editStore(product: Store): Promise<Store | undefined> {
+		return await getCustomRepository(StoreRepository).save(product)
+	}
 }

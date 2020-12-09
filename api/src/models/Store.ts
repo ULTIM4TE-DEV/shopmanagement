@@ -1,9 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { ProductCategory } from './ProductCategory'
+import { Product } from './Product'
 @Entity({ name: 'store' })
 export class Store {
 	@PrimaryGeneratedColumn({ name: 'id' })
-	public storeId: number
+	public id: number
 
 	@Column({ name: 'storeName', type: 'varchar' })
 	public storeName: string
@@ -17,8 +17,8 @@ export class Store {
 	@Column({ name: 'storeAddress', type: 'varchar' })
 	public storeAddress: string
 
-	@OneToMany((_type) => ProductCategory, (productCategory) => productCategory.productCategoryId, {
+	@OneToMany((_type) => Product, (product) => product.id, {
 		cascade: ['insert', 'remove', 'update'],
 	})
-	public productCategory: ProductCategory[]
+	public product: Product[]
 }

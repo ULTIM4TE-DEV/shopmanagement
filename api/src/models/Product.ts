@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { ProductCategory } from './ProductCategory'
+import { Store } from './Store'
 
 @Entity({ name: 'product' })
 export class Product {
 	@PrimaryGeneratedColumn({ name: 'id' })
-	public productId: number
+	public id: number
 
 	@Column({ name: 'productName', type: 'varchar' })
 	public productName: string
@@ -18,9 +19,15 @@ export class Product {
 	@Column({ name: 'productUnit', type: 'varchar' })
 	public productUnit: string
 
-	@ManyToOne((_type) => ProductCategory, (productCategory) => productCategory.productCategoryId, {
+	@ManyToOne((_type) => ProductCategory, (productCategory) => productCategory.id, {
 		nullable: true,
 	})
-	@JoinColumn({ name: 'productCategory' })
-	public productCategory: ProductCategory
+	@JoinColumn({ name: 'productCategoryId' })
+	public productCategoryId: ProductCategory
+
+	@ManyToOne((_type) => Store, (store) => store.id, {
+		nullable: true,
+	})
+	@JoinColumn({ name: 'storeId' })
+	public storeId: Store
 }

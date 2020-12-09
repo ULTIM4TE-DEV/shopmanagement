@@ -7,7 +7,7 @@ export class createProductTable1607447661833 implements MigrationInterface {
 				name: 'product',
 				columns: [
 					{
-						name: 'productId',
+						name: 'id',
 						type: 'integer',
 						isGenerated: true,
 						isPrimary: true,
@@ -32,6 +32,10 @@ export class createProductTable1607447661833 implements MigrationInterface {
 						name: 'productCategoryId',
 						type: 'integer',
 					},
+					{
+						name: 'storeId',
+						type: 'integer',
+					},
 				],
 			})
 		)
@@ -42,6 +46,16 @@ export class createProductTable1607447661833 implements MigrationInterface {
 				columnNames: ['productCategoryId'],
 				referencedColumnNames: ['id'],
 				referencedTableName: 'productCategory',
+				onDelete: 'CASCADE',
+			})
+		)
+
+		await queryRunner.createForeignKey(
+			'product',
+			new TableForeignKey({
+				columnNames: ['storeId'],
+				referencedColumnNames: ['id'],
+				referencedTableName: 'store',
 				onDelete: 'CASCADE',
 			})
 		)
