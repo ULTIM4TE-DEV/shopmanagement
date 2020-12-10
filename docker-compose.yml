@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 services:
   web:
     build: ./web
@@ -23,7 +23,8 @@ services:
       - "33061:3306"
     restart: always
     volumes:
-      - db-data:/var/lib/mysql
+      - db-docker:/var/lib/mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 volumes:
-  db-data:
+  db-docker:
     driver: local

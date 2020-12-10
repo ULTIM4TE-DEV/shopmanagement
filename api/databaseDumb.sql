@@ -1,6 +1,6 @@
 
 LOCK TABLES `store` WRITE;
-INSERT INTO `store` VALUES (1,'คึกคัก','ขายตลอด 24 ชม','0888888888','155 หมู่ 2 ต.แม่เหียะ อ.เมือง จ.เชียงใหม่ 50100');
+INSERT INTO `store` VALUES(1,'คึกคัก','ขายตลอด 24 ชม','0888888888','155 หมู่ 2 ต.แม่เหียะ อ.เมือง จ.เชียงใหม่ 50100');
 UNLOCK TABLES;
 
 LOCK TABLES `productcategory` WRITE;

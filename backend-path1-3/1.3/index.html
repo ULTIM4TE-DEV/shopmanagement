@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.3</title>
+  </head>
+  <body>
+     <h2>
+      1.3 * (Optional Test) ใช้ภาษาอะไรก็ได้เพื่อแก้ไขปัญหา
+
+      กิ่งไม้มีความยาวเป็น N ต้องการตัดกิ่งไม้เป็นท่อนเล็กๆ ตามเงื่อนไขสองข้อดังต่อไปนี้:
+      
+      กิ่งไม้แต่ละท่อนต้องมีความยาว A, B หรือ C
+      จำนวนท่อนไม้ควรมีมากที่สุด
+     </h2>
+     <h3>
+      Input บรรทัดแรกจะเป็นค่า N A B C โดยที่ N คือ ความยาวของกิ่งไม้ (1 ≤ N) และ A, B, C คือความยาวของท่อนไม้ที่กำหนด (A, B, C ≤ 4000) Output แสดงจำนวนท่อนไม้ทั้งหมดที่ตัดได้
+    </h3>
+    <button onclick="myFunction()">Try it</button>
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex;">
+        <p >Your data : </p> <p id="data"> </p>
+      </div>
+      <div style="display: flex;">
+        <p >Result : </p><p id="result"> </p>
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        let input = prompt("Input your data:")
+        let count = 0
+        let arr = input.split(" ")
+        let [n, ...l] = arr
+        l.sort()
+        for(let i = 0; i < 3; i++) {
+          if (n >= l[i]){
+            count += 1
+            n -= l[i]
+          }
+        }
+        document.getElementById("data").innerHTML = input;
+        document.getElementById("result").innerHTML = count;
+
+      }
+    </script>
+  </body>
+</html>
