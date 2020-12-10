@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1</title>
+  </head>
+  <body>
+     <h2>
+      1.1 มีหินอยู่จำนวน N ก้อน แต่ละก้อนสามารถเป็นสีแดง R เขียว G หรือน้ำเงิน B หากนำหินทั้งหมดไปสุ่มวางเรียงกันเป็นแถวเดียว 
+     </h2>
+     <h3>
+      จงหาจำนวนของคู่หินที่มีสีเดียวกันและอยู่ติดกัน Input แบ่งออกเป็น 2 บรรทัดโดยบรรทัดแรกคือค่า N แสดงถึงจำนวนหินที่มีและบรรทัดที่สองจะเป็นลำดับสีของหินที่ถูกเรียงไว้แล้ว Output ตัวเลขแสดงจำนวนคู่หินที่มีสี่เดียวกันและอยู่ติดกัน
+    </h3>
+    <button onclick="myFunction()">Try it</button>
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex;">
+        <p >Amount : </p> <p id="amount"> </p>
+      </div>
+      <div style="display: flex;">
+        <p >Stone : </p> <p id="stone"></p>
+      </div>
+      <div style="display: flex;">
+        <p >Result : </p><p id="result"> </p>
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        let amount = prompt("Input amount of stone:")
+        let stone = prompt("Input stone:")
+        let count = 0
+        for(let i = 0 ; i < stone.length ; i++) {
+        if(stone[i] === stone[i+1]) {
+          count++
+        }
+        }
+        document.getElementById("amount").innerHTML = amount;
+        document.getElementById("stone").innerHTML = stone;
+        document.getElementById("result").innerHTML = count;
+      }
+    </script>
+  </body>
+</html>

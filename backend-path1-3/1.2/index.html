@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.2</title>
+  </head>
+  <body>
+     <h2>
+      1.2 ประเทศ XYZ มีธนบัตรทั้งหมดอยู่ 5 ชนิดคือ 1, 5, 10, 20 และ 100 ลุงพรชัยมีเงินอยู่ในธนาคาร N บาท หากถอนเงินออกมาทั้งหมดจะได้ธนบัตรจำนวนน้อยที่สุดจำนวนเท่าไร
+     </h2>
+     <h3>
+      Input บรรทัดแรกคือค่า N ซึ่งแสดงถึงจำนวนเงินของลุงพรชัย Output แสดงจำนวนธนบัตรที่น้อยที่สุดที่ลุงพรชัยจะได้รับ
+    </h3>
+    <button onclick="myFunction()">Try it</button>
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex;">
+        <p >Your Money : </p> <p id="money"> </p>
+      </div>
+      <div style="display: flex;">
+        <p >Result : </p><p id="result"> </p>
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        let input = prompt("Input your money:")
+        let money = parseInt(input)
+        let pay = [0,0,0,0,0,0];
+        let numpay = [100, 50, 20, 10, 5, 1]
+        for (let i = 0 ; i < pay.length; i++) {
+            pay[i] = Math.floor(money/numpay[i])
+            money = money%numpay[i];
+        }
+        let sum = pay.reduce((a, b) => {
+          console.log(a, b)
+            return a + b;
+        }, 0)
+        document.getElementById("money").innerHTML = input;
+        document.getElementById("result").innerHTML = sum;
+      }
+    </script>
+  </body>
+</html>
