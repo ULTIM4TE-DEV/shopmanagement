@@ -96,7 +96,6 @@ export default {
 		handleCreate() {
 			this.form.validateFields((err, values) => {
 				if (!err) {
-					console.log('values', values)
 					this.$emit('create', values)
 				}
 			})
@@ -108,7 +107,6 @@ export default {
 						...values,
 						id: this.editDataUse.key,
 					}
-					console.log('payload', payload)
 					this.$emit('edit', payload)
 				}
 			})

@@ -1,6 +1,11 @@
 <template>
-	<div class="w-full flex flex-col justify-center">
-		<a-card title="Product list" bordered>
+	<div class="w-full">
+		<a-card
+			:title="`Product list Store: ${storeData ? storeData.storeName : ''}, Description: ${
+				storeData ? storeData.storeDetail : ''
+			}`"
+			bordered
+		>
 			<a-button slot="extra" @click="openModal">Create Product</a-button>
 			<a-row>
 				<a-col>
@@ -24,21 +29,23 @@
 
 <script>
 import productAPI from '~/api/product'
+import storeAPI from '~/api/store'
 export default {
 	data() {
 		return {
 			productList: [],
+			storeData: null,
 			visible: false,
 			editData: null,
 		}
 	},
 	mounted() {
 		this.getProductList()
+		this.getStoreData()
 	},
 	methods: {
 		create(form) {
 			productAPI.createProduct(form).then((response) => {
-				console.log('response', response)
 				if (response.status === 201) {
 					this.$success({
 						title: 'Create product success !',
@@ -123,6 +130,11 @@ export default {
 					}
 				})
 				this.productList = mapData
+			})
+		},
+		getStoreData() {
+			storeAPI.getStoreById(this.$route.params.id).then((response) => {
+				this.storeData = response.response
 			})
 		},
 	},

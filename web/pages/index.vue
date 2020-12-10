@@ -1,13 +1,26 @@
 <template>
-	<div class="w-full flex flex-col justify-center">
-		<a-card title="Store list" bordered>
-			<a-button slot="extra" @click="openModal">Create Store</a-button>
-			<a-row>
-				<a-col>
-					<TableStore :data="storeList" @openModalEdit="openModalEdit"></TableStore>
-				</a-col>
-			</a-row>
-		</a-card>
+	<div class="w-full">
+		<a-row :gutter="[16, 16]">
+			<a-col :span="24">
+				<a-card title="List All Store" bordered>
+					<a-button slot="extra" @click="openModal">Create Store</a-button>
+					<a-row>
+						<a-col>
+							<TableStore :data="storeList" @openModalEdit="openModalEdit"></TableStore>
+						</a-col>
+					</a-row>
+				</a-card>
+			</a-col>
+			<a-col :span="24">
+				<a-card title="List All Product" bordered>
+					<a-row>
+						<a-col>
+							<TableAllProduct :data="productList" @openModalEdit="openModalEdit"></TableAllProduct>
+						</a-col>
+					</a-row>
+				</a-card>
+			</a-col>
+		</a-row>
 		<ModalCreateStore
 			:visible="visible"
 			:closeModal="closeModal"
@@ -20,21 +33,23 @@
 
 <script>
 import storeAPI from '~/api/store'
+import productAPI from '~/api/product'
 export default {
 	data() {
 		return {
 			storeList: [],
+			productList: [],
 			visible: false,
 			editData: null,
 		}
 	},
 	mounted() {
 		this.getStoreList()
+		this.getProductList()
 	},
 	methods: {
 		create(form) {
 			storeAPI.createStore(form).then((response) => {
-				console.log('response', response.status)
 				if (response.status === 201) {
 					this.$success({
 						title: 'Create store success !',
@@ -96,6 +111,22 @@ export default {
 					}
 				})
 				this.storeList = mapData
+			})
+		},
+		getProductList() {
+			productAPI.getProducts().then((response) => {
+				const mapData = response.response.map((item) => {
+					return {
+						key: item.id,
+						name: item.productDetail,
+						description: item.productName,
+						price: item.productPrice,
+						unit: item.productUnit,
+						categoryId: item.productCategoryId.id,
+						storeId: item.storeId.id,
+					}
+				})
+				this.productList = mapData
 			})
 		},
 	},

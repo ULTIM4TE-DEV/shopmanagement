@@ -7,6 +7,12 @@ export default {
 			.then((response) => response.data)
 			.catch((error) => error)
 	},
+	getProducts: () => {
+		return axios.api
+			.get(`/products/`)
+			.then((response) => response.data)
+			.catch((error) => error)
+	},
 	createProduct: (product) => {
 		return axios.api
 			.post('/product/create', product)

@@ -126,7 +126,6 @@ export default {
 						...values,
 						storeId: this.$route.params,
 					}
-					console.log('values', values)
 					this.$emit('create', payload)
 				}
 			})
@@ -138,7 +137,6 @@ export default {
 						...values,
 						id: this.editDataUse.key,
 					}
-					console.log('payload', payload)
 					this.$emit('edit', payload)
 				}
 			})

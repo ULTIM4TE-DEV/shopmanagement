@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="shadow">
 		<a-table bordered :columns="columns" :data-source="data" :pagination="{ pageSize: 5 }">
 			<span slot="action" slot-scope="text, record">
 				<a @click="openModalEdit(record)">Edit</a>
@@ -66,15 +66,10 @@ export default {
 	},
 	methods: {
 		openModalEdit(record) {
-			console.log('In table emit', record)
 			this.$emit('openModalEdit', record)
 		},
 		openModalDelete(record) {
 			this.$emit('openModalDelete', record)
-		},
-		click(value) {
-			console.log('click')
-			console.log('value', value)
 		},
 	},
 }
