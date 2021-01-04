@@ -1,2 +1,2 @@
 # shopmanagement
-shopmanagement with Reactjs + Node express (TYPEORM)
+shopmanagement with Vuejs + Node express (TYPEORM)
